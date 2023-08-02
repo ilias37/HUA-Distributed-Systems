@@ -1,0 +1,66 @@
+<!doctype html>
+
+<html lang="en"
+      xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{page_layout/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Actor List</title>
+</head>
+
+<body>
+<div layout:fragment="main-content">
+
+    <div th:if="${ not#lists.isEmpty(notaries)}">
+        <table  class="table table-dark table-striped">
+            <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Username</th>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">Email</th>
+                <th sec:authorize="hasAuthority('ROLE_ADMIN')" scope="col">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="notary : ${notaries}">
+                <td th:text="${notary.id}"></td>
+                <td th:text="${notary.username}"></td>
+                <td th:text="${notary.firstName}"></td>
+                <td th:text="${notary.lastName}"></td>
+                <td th:text="${notary.email}"></td>
+                <td sec:authorize="hasAuthority('ROLE_ADMIN')">
+                    <button type="submit" th:id="${notary.id}"
+                        name="deleteNotary"><i class="remove user icon"></i>
+                        Delete
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+            </table>
+    </div>
+
+    <script type="text/javascript">
+        $("[name='deleteNotary']").click(function() {
+            var urlCall = "/notaries/";
+            $.ajax({
+                url : urlCall + $(this).attr('id'),
+                type : 'DELETE',
+                success : function(result) {
+                    console.log(result);
+                    $(location).attr("href", value="/notarylist");
+                },
+                error : function(result) {
+                    console.log(result);
+                },
+            });
+        });
+    </script>
+</div>
+
+</body>
+
+</html>

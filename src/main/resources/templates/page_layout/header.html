@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+<header class="mb-auto" th:fragment="header">
+    <div>
+        <h3 class="float-md-start mb-0">Tax System</h3>
+        <nav class="nav nav-masthead justify-content-center float-md-end">
+
+            <a class="nav-link fw-bold py-1 px-0 active" aria-current="page" href="/" th:href="@{/}">Home</a>
+
+            <a sec:authorize="hasAnyAuthority('ROLE_ADMIN', 'ROLE_NOTARY')" class="nav-link fw-bold py-1 px-0" aria-current="page" href="/actorlist" th:href="@{/actorlist}">Actor List</a>
+            <a sec:authorize="hasAuthority('ROLE_ADMIN')" class="nav-link fw-bold py-1 px-0" href="/actorform" th:href="@{/actorform}">Actor form</a>
+
+            <a sec:authorize="hasAnyAuthority('ROLE_ADMIN', 'ROLE_NOTARY', 'ROLE_ACTOR')" class="nav-link fw-bold py-1 px-0" aria-current="page" href="/contractlist" th:href="@{/contractlist}">Contract List</a>
+            <a sec:authorize="hasAnyAuthority('ROLE_ADMIN', 'ROLE_NOTARY')" class="nav-link fw-bold py-1 px-0" href="/contractform" th:href="@{/contractform}">Contract form</a>
+
+            <a sec:authorize="hasAuthority('ROLE_ADMIN')" class="nav-link fw-bold py-1 px-0" aria-current="page" href="/notarylist" th:href="@{/notarylist}">Notary List</a>
+            <a sec:authorize="hasAuthority('ROLE_ADMIN')" class="nav-link fw-bold py-1 px-0" href="/notaryform" th:href="@{/notaryform}">Notary form</a>
+
+            <a sec:authorize="isAuthenticated()" class="nav-link fw-bold py-1 px-0" href="/logout" th:href="@{/logout}">Logout</a>
+            <a sec:authorize="!isAuthenticated()" class="nav-link fw-bold py-1 px-0" href="/login" th:href="@{/login}">Login</a>
+            <a sec:authorize="!isAuthenticated()" class="nav-link fw-bold py-1 px-0" href="/registersb" th:href="@{/registersb}">Register as a Seller/Buyer</a>
+            <a sec:authorize="!isAuthenticated()" class="nav-link fw-bold py-1 px-0" href="/registern" th:href="@{/registern}">Register as a Notary</a>
+
+            <a sec:authorize="hasAuthority('ROLE_ADMIN')" class="nav-link fw-bold py-1 px-0" aria-current="page" href="/registersb" th:href="@{/registersb}">Admin Reg a S/B</a>
+            <a sec:authorize="hasAuthority('ROLE_ADMIN')" class="nav-link fw-bold py-1 px-0" href="/registern" th:href="@{/registern}">Admin Reg a N</a>
+
+        </nav>
+    </div>
+</header>
+</body>
+
+</html>

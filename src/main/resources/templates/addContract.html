@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en"
+      xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{page_layout/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Contract Form</title>
+</head>
+<body>
+<div layout:fragment="main-content">
+<form class="row g-3" th:action="@{/contractform}" th:object="${contract}" method="post">
+
+    <div class="form-outline mb-4">
+        <label for="notaryId" class="form-label">Notary ID</label>
+        <input type="number" th:field="*{notaryId}" id="notaryId" placeholder="notaryId" class="form-control">
+        <span th:if="${#fields.hasErrors('notaryId')}" th:errors="*{notaryId}"></span>
+    </div>
+
+    <div class="form-outline mb-4">
+        <label for="sellerId" class="form-label">Seller ID</label>
+        <input type="number" th:field="*{sellerId}" id="sellerId" placeholder="sellerId" class="form-control">
+        <span th:if="${#fields.hasErrors('sellerId')}" th:errors="*{sellerId}"></span>
+    </div>
+
+    <div class="form-outline mb-4">
+        <label for="buyerId" class="form-label">Buyer ID</label>
+        <input type="number" th:field="*{buyerId}" id="name" placeholder="buyerId" class="form-control">
+        <span th:if="${#fields.hasErrors('buyerId')}" th:errors="*{buyerId}"></span>
+    </div>
+
+    <div class="form-outline mb-4">
+        <label for="address"  class="form-label">Address</label>
+        <input type="text" th:field="*{address}" id="address" placeholder="address" class="form-control">
+        <span th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></span>
+    </div>
+
+    <div class="form-outline mb-4">
+        <label for="tax"  class="form-label">Tax</label>
+        <input type="number" th:field="*{tax}" id="tax" placeholder="tax" class="form-control">
+        <span th:if="${#fields.hasErrors('tax')}" th:errors="*{tax}"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+</div>
+</body>
+</html>

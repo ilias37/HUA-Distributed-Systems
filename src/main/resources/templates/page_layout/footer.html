@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<footer class="mt-auto text-white-50" th:fragment="footer">
+
+    <div sec:authorize="hasAuthority('ROLE_ACTOR')">Hi, you are a boring actor.</div>
+    <div sec:authorize="hasAuthority('ROLE_NOTARY')">Hi, you are a normal notary.</div>
+    <div sec:authorize="hasAuthority('ROLE_ADMIN')">Hi, you are a powerful admin.</div>
+
+    <div sec:authorize="isAuthenticated()">Authenticated username: 
+        <span sec:authentication="principal.username"></span>
+    </div>
+    
+    <div sec:authorize="isAuthenticated()">Authenticated user roles:
+        <span sec:authentication="principal.authorities"></span>
+    </div>
+
+</footer>
+
+</body>
+</html>
