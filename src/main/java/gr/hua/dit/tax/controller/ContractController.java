@@ -62,6 +62,7 @@ public class ContractController {
         contractRepository.deleteById(id);
     }
 
+    // create/add a contract in a buyer
     @PostMapping("/{cid}/buyer")
     Actor addActor(@PathVariable int cid, @RequestBody Actor actor) {
         
@@ -70,7 +71,8 @@ public class ContractController {
 
         if (contract == null) {
             throw new ResponseStatusException(
-                HttpStatus.NOT_FOUND, "entity not found");
+                HttpStatus.NOT_FOUND, "entity not found"
+            );
         }
 
         if (actorId != 0) {

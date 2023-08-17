@@ -37,13 +37,13 @@
                 <td th:text="${contract.id}"></td>
                 <td th:text="${contract.notaryId}"></td>
                 <td th:text="${contract.sellerId}"></td>
-                <td th:text="${contract.buyerId}"></td>
+                <td th:text="${contract.actor.getId}"></td>
                 <td th:text="${contract.address}"></td>
                 <td th:text="${contract.tax}"></td>
                 <td th:text="${contract.sellerDec}"></td>
                 <td th:text="${contract.buyerDec}"></td>
 
-                <td sec:authorize="hasAnyAuthority('ROLE_ADMIN', 'ROLE_ACTOR')">
+                <td sec:authorize="hasAnyAuthority('ROLE_ADMIN')">
                     <button type="submit" th:id="${contract.id}"
                         name="deleteContract"><i class="remove contract icon"></i>
                         Delete

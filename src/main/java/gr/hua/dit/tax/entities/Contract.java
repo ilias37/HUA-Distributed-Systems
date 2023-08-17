@@ -45,7 +45,7 @@ public class Contract{
 
     //Susxethsh me ton pinaka users
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "buyer_id")
+    @JoinColumn(name = "buyerid", referencedColumnName = "id")
     private Actor actor;
 
     public Actor getActor() {
