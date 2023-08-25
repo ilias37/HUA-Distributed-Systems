@@ -3,6 +3,8 @@ package gr.hua.dit.tax.entities;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "contracts")
 public class Contract{
@@ -46,14 +48,15 @@ public class Contract{
     //Susxethsh me ton pinaka users
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "buyerid", referencedColumnName = "id")
-    private Actor actor;
+    @JsonBackReference
+    private Actor actor_buyer;
 
     public Actor getActor() {
-        return actor;
+        return actor_buyer;
     }
 
-    public void setActor(Actor actor) {
-        this.actor = actor;
+    public void setActor(Actor actor_buyer) {
+        this.actor_buyer = actor_buyer;
     }
 
     public Contract() {

@@ -2,9 +2,6 @@ package gr.hua.dit.tax.controller;
  
 import java.util.List;
 import java.util.Optional;
-
-import javax.persistence.EntityManager;
-import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -17,9 +14,6 @@ public class ActorController {
 
     @Autowired
     ActorRepository actorRepository;
-
-    private EntityManager entityManager;
-
 
     @GetMapping("")
     public List<Actor> findAll(){
@@ -36,11 +30,6 @@ public class ActorController {
     @GetMapping("/{id}")
     Optional <Actor> findById(@PathVariable int id) {
         return actorRepository.findById(id);
-    }
-
-    @Transactional
-    public Actor find(int id) {
-        return entityManager.find(Actor.class, id);
     }
 
     @DeleteMapping("/{id}")

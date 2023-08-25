@@ -1,7 +1,11 @@
 package gr.hua.dit.tax.entities;
 
+import java.util.List;
+
 import javax.persistence.*;
 import javax.validation.constraints.*;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "actors")
@@ -32,18 +36,18 @@ public class Actor {
     @Size(max = 50, message = "Email should not be greater than 50 characters")
     private String email;
 
-    // //Susxethsh me ton pinaka users
-    // @OneToOne(cascade = CascadeType.ALL)
-    // @JoinColumn(name = "userid")
-    // private Users user;
+    // //Susxethsh me ton pinaka contracts
+    @OneToMany(mappedBy = "actor_buyer", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private List<Contract> contracts; 
 
-    // public Users getUser() {
-    //     return user;
-    // }
+    public List<Contract> getContracts() {
+        return contracts;
+    }
 
-    // public void setUser(Users user) {
-    //     this.user = user;
-    // }
+    public void setContracts(List<Contract> contracts) {
+        this.contracts = contracts;
+    }
 
     public Actor() {
  

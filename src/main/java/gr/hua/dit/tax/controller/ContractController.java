@@ -2,16 +2,11 @@ package gr.hua.dit.tax.controller;
 
 import java.util.List;
 import java.util.Optional;
-
-import javax.transaction.Transactional;
-import javax.persistence.EntityManager;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-
 import gr.hua.dit.tax.entities.Actor;
 import gr.hua.dit.tax.entities.Contract;
 import gr.hua.dit.tax.repository.ActorRepository;
@@ -23,17 +18,9 @@ public class ContractController {
 
     @Autowired
     ActorRepository actorRepository;
-
-    @Autowired
-    ActorController actorController;
-
-    Contract contract;
  
     @Autowired
     ContractRepository contractRepository;
-
-    @Autowired
-    private EntityManager entityManager;
 
     @GetMapping("")
     public List<Contract> findAll(){
@@ -52,11 +39,6 @@ public class ContractController {
         return contractRepository.findById(id);
     }
 
-    @Transactional
-    public Contract find(int id) {
-        return entityManager.find(Contract.class, id);
-    }
-
     @DeleteMapping("/{id}")
     public void deleteById(@PathVariable int id) {
         contractRepository.deleteById(id);
@@ -67,7 +49,7 @@ public class ContractController {
     Actor addActor(@PathVariable int cid, @RequestBody Actor actor) {
         
         int actorId = actor.getId();
-        Contract contract = find(cid);
+        Contract contract = contractRepository.getReferenceById(cid);
 
         if (contract == null) {
             throw new ResponseStatusException(
@@ -76,7 +58,7 @@ public class ContractController {
         }
 
         if (actorId != 0) {
-            Actor anActor = actorController.find(actorId);
+            Actor anActor = actorRepository.getReferenceById(actorId);
             contract.setActor(anActor);
             actorRepository.save(actor);
             return anActor;
