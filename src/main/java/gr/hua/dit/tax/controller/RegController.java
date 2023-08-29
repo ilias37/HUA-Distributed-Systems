@@ -19,7 +19,6 @@ import gr.hua.dit.tax.entities.Notary;
 import gr.hua.dit.tax.entities.UserReg;
 import gr.hua.dit.tax.repository.ActorRepository;
 import gr.hua.dit.tax.repository.NotaryRepository;
-import gr.hua.dit.tax.repository.UserRegRepository;
 
 @Controller
 public class RegController {
@@ -35,9 +34,6 @@ public class RegController {
 
     @Autowired
     private NotaryRepository notaryRepository;
-
-    @Autowired
-    private UserRegRepository userRegRepository;
 
     //Gia registration tou Seller/Buyer
     //Emfanish formas
@@ -60,15 +56,6 @@ public class RegController {
         // Gemisma ston Actor afou prwta krathsw firstName, lastName, email
         Actor actor = new Actor(userRegObj.getUsername(), userRegObj.getFirstName(), userRegObj.getLastName(), userRegObj.getEmail());
         actorRepository.save(actor);
-
-        // UserReg userRegObj1 = new UserReg(userRegObj.getUsername(), 
-        //                                   userRegObj.getFirstName(), 
-        //                                   userRegObj.getLastName(), 
-        //                                   userRegObj.getEmail(), 
-        //                                   passwordEncoder.encode(userRegObj.getPassword()), 
-        //                                   "ROLE_ACTOR");
-
-        // userRegRepository.save(userRegObj1);
 
         return new ModelAndView("redirect:/");
     }
@@ -94,15 +81,6 @@ public class RegController {
         //Gemisma ston Notary afou prwta krathsw firstName, lastName, email
         Notary notary = new Notary(userRegObj.getUsername(), userRegObj.getFirstName(), userRegObj.getLastName(), userRegObj.getEmail());
         notaryRepository.save(notary);
-
-        // UserReg userRegObj1 = new UserReg(userRegObj.getUsername(), 
-        //                                   userRegObj.getFirstName(), 
-        //                                   userRegObj.getLastName(), 
-        //                                   userRegObj.getEmail(), 
-        //                                   passwordEncoder.encode(userRegObj.getPassword()), 
-        //                                   "ROLE_NOTARY");
-                                          
-        // userRegRepository.save(userRegObj1);
 
         return new ModelAndView("redirect:/");
     }

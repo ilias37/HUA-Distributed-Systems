@@ -5,7 +5,7 @@ import java.util.List;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "actors")
@@ -36,17 +36,29 @@ public class Actor {
     @Size(max = 50, message = "Email should not be greater than 50 characters")
     private String email;
 
-    // //Susxethsh me ton pinaka contracts
-    @OneToMany(mappedBy = "actor_buyer", cascade = CascadeType.ALL)
-    @JsonManagedReference
-    private List<Contract> contracts; 
+    //Susxethsh me ton pinaka contracts
+    @OneToMany(mappedBy = "buyer")
+    @JsonIgnore
+    private List<Contract> contractsAsBuyer;
 
-    public List<Contract> getContracts() {
-        return contracts;
+    public List<Contract> getContractsAsBuyer() {
+        return contractsAsBuyer;
     }
 
-    public void setContracts(List<Contract> contracts) {
-        this.contracts = contracts;
+    public void setContractsAsBuyer(List<Contract> contractsAsBuyer) {
+        this.contractsAsBuyer = contractsAsBuyer;
+    }
+
+    @OneToMany(mappedBy = "seller")
+    @JsonIgnore
+    private List<Contract> contractsAsSeller;
+
+    public List<Contract> getContractsAsSeller() {
+        return contractsAsSeller;
+    }
+
+    public void setContractsAsSeller(List<Contract> contractsAsSeller) {
+        this.contractsAsSeller = contractsAsSeller;
     }
 
     public Actor() {

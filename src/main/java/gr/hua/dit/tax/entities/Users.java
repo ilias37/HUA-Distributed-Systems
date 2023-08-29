@@ -36,18 +36,6 @@ public class Users {
         this.authority = authority;
     }
 
-    // //Susxethsh me ton pinaka actors, eina eikonikh mono ston kosmo ths java
-    // @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-    // private Actor actor;
-
-    // public Actor getActor() {
-    //     return actor;
-    // }
-
-    // public void setActor(Actor actor) {
-    //     this.actor = actor;
-    // }
-
     public Users() {
 
     }

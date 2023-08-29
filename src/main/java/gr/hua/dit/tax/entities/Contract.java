@@ -2,8 +2,7 @@ package gr.hua.dit.tax.entities;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "contracts")
@@ -18,16 +17,6 @@ public class Contract{
     @NotNull(message = "Please enter the notary's id")
     @Digits(integer = 9, fraction = 2, message = "Id should not be greater than 9 digits")
     private int notaryId;
-
-    @Column(name = "sellerId")
-    @NotNull(message = "Please enter the seller's id")
-    @Digits(integer = 9, fraction = 2, message = "Id should not be greater than 9 digits")
-    private int sellerId;
-
-    // @Column(name = "buyerId")
-    // @NotNull(message = "Please enter the buyer's id")
-    // @Digits(integer = 9, fraction = 2, message = "Id should not be greater than 9 digits")
-    // private int buyerId;
 
     @Column(name = "address", unique = true)
     @NotBlank(message = "Please enter the property's address")
@@ -48,25 +37,36 @@ public class Contract{
     //Susxethsh me ton pinaka users
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "buyerid", referencedColumnName = "id")
-    @JsonBackReference
-    private Actor actor_buyer;
+    @JsonManagedReference
+    private Actor buyer;
 
-    public Actor getActor() {
-        return actor_buyer;
+    public Actor getBuyer() {
+        return buyer;
     }
 
-    public void setActor(Actor actor_buyer) {
-        this.actor_buyer = actor_buyer;
+    public void setBuyer(Actor buyer) {
+        this.buyer = buyer;
+    }
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "sellerid", referencedColumnName = "id")
+    @JsonManagedReference
+    private Actor seller;
+
+    public Actor getSeller() {
+        return seller;
+    }
+
+    public void setSeller(Actor seller) {
+        this.seller = seller;
     }
 
     public Contract() {
 
     }
 
-    public Contract(int notaryId, int sellerId, String address, int tax, boolean sellerDec, boolean buyerDec) {
+    public Contract(int notaryId, String address, int tax, boolean sellerDec, boolean buyerDec) {
         this.notaryId = notaryId;
-        this.sellerId = sellerId;
-        // this.buyerId = buyerId;
         this.address = address;
         this.tax = tax;
         this.sellerDec = sellerDec;
@@ -88,22 +88,6 @@ public class Contract{
     public void setNotaryId(int notaryId) {
         this.notaryId = notaryId;
     }
-
-    public int getSellerId() {
-        return sellerId;
-    }
-
-    public void setSellerId(int sellerId) {
-        this.sellerId = sellerId;
-    }
-
-    // public int getBuyerId() {
-    //     return buyerId;
-    // }
-
-    // public void setBuyerId(int buyerId) {
-    //     this.buyerId = buyerId;
-    // }
 
     public String getAddress() {
         return address;
@@ -142,8 +126,6 @@ public class Contract{
     public String toString() {
         return "Contract:\n" +
                "NotaryId: " + notaryId + "\n" +
-               "SellerId: " + sellerId + "\n" +
-            //    "BuyerId: " + buyerId + "\n" +
                "Address" + address + "\n" +
                "Tax: " + tax + "\n " +
                "SellerDec" + sellerDec + "\n" +

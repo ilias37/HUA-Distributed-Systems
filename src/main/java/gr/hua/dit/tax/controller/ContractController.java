@@ -46,28 +46,48 @@ public class ContractController {
 
     // create/add a contract in a buyer
     @PostMapping("/{cid}/buyer")
-    Actor addActor(@PathVariable int cid, @RequestBody Actor actor) {
+    Actor addBuyer(@PathVariable int cid, @RequestBody Actor actor) {
         
         int actorId = actor.getId();
         Contract contract = contractRepository.getReferenceById(cid);
 
         if (contract == null) {
             throw new ResponseStatusException(
-                HttpStatus.NOT_FOUND, "entity not found"
+                HttpStatus.NOT_FOUND, "Contract not found"
             );
         }
 
         if (actorId != 0) {
             Actor anActor = actorRepository.getReferenceById(actorId);
-            contract.setActor(anActor);
-            actorRepository.save(actor);
-            return anActor;
+            contract.setBuyer(anActor);
+            contractRepository.save(contract);
+            return actor;
         }
 
-        contract.setActor(actor);
-        actorRepository.save(actor);
-        return actor;
+        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid buyer ID");
+    }
 
+    // create/add a contract in a seller
+    @PostMapping("/{cid}/seller")
+    Actor addSeller(@PathVariable int cid, @RequestBody Actor actor) {
+        
+        int actorId = actor.getId();
+        Contract contract = contractRepository.getReferenceById(cid);
+
+        if (contract == null) {
+            throw new ResponseStatusException(
+                HttpStatus.NOT_FOUND, "Contract not found"
+            );
+        }
+
+        if (actorId != 0) {
+            Actor anActor = actorRepository.getReferenceById(actorId);
+            contract.setSeller(anActor);
+            contractRepository.save(contract);
+            return actor;
+        }
+
+        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid seller ID");
     }
 
 }
