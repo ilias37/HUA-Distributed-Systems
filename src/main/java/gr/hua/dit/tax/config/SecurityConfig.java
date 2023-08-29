@@ -36,7 +36,8 @@ public class SecurityConfig {
             .antMatchers("/registersb").permitAll()
             .antMatchers("/registern").permitAll()
 
-            .antMatchers("/actors/**", "/contracts/**", "/notaries/**").hasAuthority("ROLE_ADMIN")  //API xwris gui
+            .antMatchers("/actors/**", "/notaries/**").hasAuthority("ROLE_ADMIN")
+            .antMatchers("/contracts/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_ACTOR")
             .antMatchers("/users/**", "/settings/**").hasAuthority("ROLE_ADMIN")  //Den uparxoun controllers gia auta
 
             .antMatchers("/actorlist/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_NOTARY")

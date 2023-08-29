@@ -27,7 +27,7 @@
                 <th scope="col">Seller's Dec</th>
                 <th scope="col">Buyer's Dec</th>
                 <th sec:authorize="hasAuthority('ROLE_ADMIN')" scope="col">Actions</th> 
-                <th sec:authorize="hasAnyAuthority('ROLE_ADMIN', 'ROLE_ACTOR')" scope="col">Acc/Del</th> 
+                <th sec:authorize="hasAnyAuthority('ROLE_ADMIN', 'ROLE_ACTOR')" scope="col">Acceptance</th> 
 
             </tr>
             </thead>
@@ -53,13 +53,13 @@
                 <td sec:authorize="hasAnyAuthority('ROLE_ADMIN', 'ROLE_ACTOR')">
 
                     <button type="submit" th:id="${contract.id}"
-                        name="acceptContract"><i class="accept contract icon"></i>
-                        Accept
+                        name="acceptAsSeller"><i class="accept contract icon"></i>
+                        Seller's √
                     </button>
 
                     <button type="submit" th:id="${contract.id}"
-                        name="rejectContract"><i class="reject contract icon"></i>
-                        Reject
+                        name="acceptAsBuyer"><i class="accept contract icon"></i>
+                        Buyer's √
                     </button>
                 </td>
                 
@@ -85,15 +85,34 @@
         });
     </script>
 
-    <!-- den douleuei epeidh den uparxei methodos ston controller -->
     <script type="text/javascript">
-        $("[name='acceptContract']").click(function() {
+        $("[name='acceptAsSeller']").click(function() {
             var urlCall = "/contracts/";
             $.ajax({
-                url : urlCall + $(this).attr('id'),
+                url : urlCall + $(this).attr('id') + "/seller",
                 type : 'PATCH',
                 data: {
                     sellerDec: true
+                },
+                success : function(result) {
+                    console.log(result);
+                    $(location).attr("href", value="/contractlist");
+                },
+                error : function(result) {
+                    console.log(result);
+                },
+            });
+        });
+    </script>
+
+    <script type="text/javascript">
+        $("[name='acceptAsBuyer']").click(function() {
+            var urlCall = "/contracts/";
+            $.ajax({
+                url : urlCall + $(this).attr('id') + "/buyer",
+                type : 'PATCH',
+                data: {
+                    buyerDec: true
                 },
                 success : function(result) {
                     console.log(result);

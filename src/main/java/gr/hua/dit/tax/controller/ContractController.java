@@ -44,6 +44,36 @@ public class ContractController {
         contractRepository.deleteById(id);
     }
 
+    @PatchMapping("/{id}/seller")
+    public void updateSellerDecision(@PathVariable int id) {
+
+        Contract contract = contractRepository.getReferenceById(id);
+
+        if (contract == null) {
+            throw new ResponseStatusException(
+                HttpStatus.NOT_FOUND, "Contract not found"
+            );
+        }
+
+        contract.setSellerDec(true);;
+        contractRepository.save(contract);
+    }
+
+    @PatchMapping("/{id}/buyer")
+    public void updateBuyerDecision(@PathVariable int id) {
+
+        Contract contract = contractRepository.getReferenceById(id);
+
+        if (contract == null) {
+            throw new ResponseStatusException(
+                HttpStatus.NOT_FOUND, "Contract not found"
+            );
+        }
+
+        contract.setBuyerDec(true);;
+        contractRepository.save(contract);
+    }
+
     // create/add a contract in a buyer
     @PostMapping("/{cid}/buyer")
     Actor addBuyer(@PathVariable int cid, @RequestBody Actor actor) {

@@ -35,7 +35,7 @@ public class Contract{
     private boolean buyerDec = false;
 
     //Susxethsh me ton pinaka users
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "buyerid", referencedColumnName = "id")
     @JsonManagedReference
     private Actor buyer;
@@ -48,7 +48,7 @@ public class Contract{
         this.buyer = buyer;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "sellerid", referencedColumnName = "id")
     @JsonManagedReference
     private Actor seller;
@@ -117,7 +117,7 @@ public class Contract{
         return buyerDec;
     }
 
-    public void setbuyerDec(boolean buyerDec) {
+    public void setBuyerDec(boolean buyerDec) {
         this.buyerDec = buyerDec;
     }
 
