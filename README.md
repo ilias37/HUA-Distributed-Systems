@@ -1,43 +1,30 @@
-### Run a postgres database using docker
+### Run the app
 
+Step 1: Run from terminal
 ```bash
 docker run --name spb_db --rm -e  POSTGRES_PASSWORD=pass123 -e POSTGRES_DB=taxSys --net=host -v pgdata14:/var/lib/postgresql/data  -d postgres:14
 ```
-run init sql scripts
-```bash
-docker run --name spb_db --rm -e  POSTGRES_PASSWORD=pass123 -e POSTGRES_DB=taxSys --net=host -v "$(pwd)"/assets/db:/docker-entrypoint-initdb.d -v pgdata14:/var/lib/postgresql/data -d postgres:14
-```
+Step 2: Run the project from your IDE
+
+Step 3: Run the assets/db/users.sql from a database editor
 
 ## remove db data
 ```bash
 docker volume rm pgdata14
 ```
 
-## connect to database using psql
+| USER    | PASSWORD | ROLES       |
+|---------|----------|-------------|
+| actor1  | pass123  | ROLE_USER   |
+| actor2  | pass123  | ROLE_USER   |
+| actor3  | pass123  | ROLE_USER   |
+| actor4  | pass123  | ROLE_USER   |
+| notary1 | pass123  | ROLE_NOTARY |
+| notary2 | pass123  | ROLE_NOTARY |
+| notary3 | pass123  | ROLE_NOTARY |
+| admin1  | pass123  | ROLE_ADMIN  |
+| admin2  | pass123  | ROLE_ADMIN  |
 
-```bash
-sudo apt install postgresl-client
-psql -h localhost -U postgres -d students -p 5432 -W
-```
-
-# Branches:
-* [Main](https://gitlab.com/atsadimas/springbootdemo). Spring boot application with thymeleaf, spring security and bootstrap 5
-Existing Users and Roles in pre-configured initial sql
-
-| USER  | PASSWORD | ROLES       |
-|-------|----------|-------------|
-| user1 | pass123  | USER        |
-| user2 | pass123  | USER        |
-| admin | pass123  | USER, ADMIN |
-| root  | pass123  | ADMIN       |
- 
-You can create users using /register
-* [Security](https://gitlab.com/atsadimas/springbootdemo/-/tree/security). Spring Boot Backend with JWT Authentication
-
-API endpoints provided to register users
 
 ## Links:
 * [install docker](https://tinyurl.com/2m3bhahn)
-
-
-Στον κατάλογο assets/db έχω σκριπτ για να τα τρέχετε χειροκίνητα

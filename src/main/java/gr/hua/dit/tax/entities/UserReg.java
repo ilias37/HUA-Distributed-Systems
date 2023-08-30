@@ -7,7 +7,6 @@ import javax.validation.constraints.*;
 @Table(name = "userreg")
 public class UserReg {
     
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -37,9 +36,6 @@ public class UserReg {
     @NotBlank(message = "Please enter your password")
     @Size(max = 100, message = "Password should not be greater than 100 characters")
     private String password;
-
-    // @Column(name = "role")
-    // private String role;
 
     public UserReg() {
  
@@ -101,13 +97,5 @@ public class UserReg {
     public void setPassword(String password) {
         this.password = password;
     }
-
-    // public String getRole() {
-    //     return role;
-    // }
-
-    // public void setRole(String role) {
-    //     this.role = role;
-    // }
 
 }
