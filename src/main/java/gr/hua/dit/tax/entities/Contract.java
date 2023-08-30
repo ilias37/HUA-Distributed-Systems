@@ -76,7 +76,6 @@ public class Contract{
     }
 
     public Contract(String address, int tax, boolean sellerDec, boolean buyerDec) {
-        // this.notaryId = notaryId;
         this.address = address;
         this.tax = tax;
         this.sellerDec = sellerDec;
@@ -122,7 +121,6 @@ public class Contract{
     public void setBuyerDec(boolean buyerDec) {
         this.buyerDec = buyerDec;
     }
-
 
     @Override
     public String toString() {

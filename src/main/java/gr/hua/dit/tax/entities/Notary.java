@@ -35,16 +35,16 @@ public class Notary{
     private String email;
 
     //Susxethsh me ton pinaka contracts
-    @OneToMany(mappedBy = "notary")
+    @OneToMany(mappedBy = "notary") 
     @JsonIgnore
-    private List<Contract> contract;
+    private List<Contract> contracts;
 
     public List<Contract> getContracts() {
-        return contract;
+        return contracts;
     }
 
-    public void setContracts(List<Contract> contract) {
-        this.contract = contract;
+    public void setContracts(List<Contract> contracts) {
+        this.contracts = contracts;
     }
 
     public Notary() {
