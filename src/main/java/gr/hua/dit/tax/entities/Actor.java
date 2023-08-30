@@ -1,10 +1,8 @@
 package gr.hua.dit.tax.entities;
 
 import java.util.List;
-
 import javax.persistence.*;
 import javax.validation.constraints.*;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -49,6 +47,7 @@ public class Actor {
         this.contractsAsBuyer = contractsAsBuyer;
     }
 
+    //Susxethsh me ton pinaka contracts
     @OneToMany(mappedBy = "seller")
     @JsonIgnore
     private List<Contract> contractsAsSeller;

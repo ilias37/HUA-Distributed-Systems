@@ -35,7 +35,7 @@
             <tbody>
             <tr th:each="contract : ${contracts}">
                 <td th:text="${contract.id}"></td>
-                <td th:text="${contract.notaryId}"></td>
+                <td th:text="${contract.getNotary.getId}"></td>
                 <td th:text="${contract.getSeller.getId}"></td>
                 <td th:text="${contract.getBuyer.getId}"></td>
                 <td th:text="${contract.address}"></td>

@@ -13,11 +13,6 @@ public class Contract{
     @Column(name = "id")
     private int id;
 
-    @Column(name = "notaryId")
-    @NotNull(message = "Please enter the notary's id")
-    @Digits(integer = 9, fraction = 2, message = "Id should not be greater than 9 digits")
-    private int notaryId;
-
     @Column(name = "address", unique = true)
     @NotBlank(message = "Please enter the property's address")
     @Size(max = 30, message = "Addres should not be greater than 30 characters")
@@ -34,7 +29,7 @@ public class Contract{
     @Column(name = "buyerdec")
     private boolean buyerDec = false;
 
-    //Susxethsh me ton pinaka users
+    //Susxethsh me ton pinaka actors
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "buyerid", referencedColumnName = "id")
     @JsonManagedReference
@@ -48,6 +43,7 @@ public class Contract{
         this.buyer = buyer;
     }
 
+    //Susxethsh me ton pinaka actors
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "sellerid", referencedColumnName = "id")
     @JsonManagedReference
@@ -61,12 +57,26 @@ public class Contract{
         this.seller = seller;
     }
 
+    //Susxethsh me ton pinaka notaries
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @JoinColumn(name = "notaryid", referencedColumnName = "id")
+    @JsonManagedReference
+    private Notary notary;
+
+    public Notary getNotary() {
+        return notary;
+    }
+
+    public void setNotary(Notary notary) {
+        this.notary = notary;
+    }
+
     public Contract() {
 
     }
 
-    public Contract(int notaryId, String address, int tax, boolean sellerDec, boolean buyerDec) {
-        this.notaryId = notaryId;
+    public Contract(String address, int tax, boolean sellerDec, boolean buyerDec) {
+        // this.notaryId = notaryId;
         this.address = address;
         this.tax = tax;
         this.sellerDec = sellerDec;
@@ -79,14 +89,6 @@ public class Contract{
 
     public void setId(int id) {
         this.id = id;
-    }
-    
-    public int getNotaryId() {
-        return notaryId;
-    }
-
-    public void setNotaryId(int notaryId) {
-        this.notaryId = notaryId;
     }
 
     public String getAddress() {
@@ -125,7 +127,6 @@ public class Contract{
     @Override
     public String toString() {
         return "Contract:\n" +
-               "NotaryId: " + notaryId + "\n" +
                "Address" + address + "\n" +
                "Tax: " + tax + "\n " +
                "SellerDec" + sellerDec + "\n" +

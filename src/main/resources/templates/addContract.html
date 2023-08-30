@@ -14,8 +14,8 @@
 
     <div class="form-outline mb-4">
         <label for="notaryId" class="form-label">Notary ID</label>
-        <input type="number" th:field="*{notaryId}" id="notaryId" placeholder="notaryId" class="form-control">
-        <span th:if="${#fields.hasErrors('notaryId')}" th:errors="*{notaryId}"></span>
+        <input type="number" th:field="*{notary}" id="name" placeholder="notaryId" class="form-control">
+        <span th:if="${#fields.hasErrors('notary')}" th:errors="*{notary}"></span>
     </div>
 
     <div class="form-outline mb-4">
@@ -25,7 +25,7 @@
     </div>
 
     <div class="form-outline mb-4">
-        <label for="actor" class="form-label">Buyer ID</label>
+        <label for="buyerId" class="form-label">Buyer ID</label>
         <input type="number" th:field="*{buyer}" id="name" placeholder="buyerId" class="form-control">
         <span th:if="${#fields.hasErrors('buyer')}" th:errors="*{buyer}"></span>
     </div>

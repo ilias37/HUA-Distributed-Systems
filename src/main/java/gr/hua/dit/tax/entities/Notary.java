@@ -1,7 +1,9 @@
 package gr.hua.dit.tax.entities;
 
+import java.util.List;
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "notaries")
@@ -31,6 +33,19 @@ public class Notary{
     @Email(message = "Please enter a valid email")
     @Size(max = 50, message = "Email should not be greater than 50 characters")
     private String email;
+
+    //Susxethsh me ton pinaka contracts
+    @OneToMany(mappedBy = "notary")
+    @JsonIgnore
+    private List<Contract> contract;
+
+    public List<Contract> getContracts() {
+        return contract;
+    }
+
+    public void setContracts(List<Contract> contract) {
+        this.contract = contract;
+    }
 
     public Notary() {
  
