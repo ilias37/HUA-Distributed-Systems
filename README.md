@@ -8,12 +8,13 @@ Step 2: Run the project from your IDE
 
 Step 3: Run the assets/db/users.sql from a database editor
 
-## remove db data
+## Remove db data
 ```bash
 docker volume rm pgdata14
 ```
 
-| USER    | PASSWORD | ROLES       |
+## App's users
+| USERS   | PASSWORD | ROLES       |
 |---------|----------|-------------|
 | actor1  | pass123  | ROLE_USER   |
 | actor2  | pass123  | ROLE_USER   |
@@ -24,6 +25,7 @@ docker volume rm pgdata14
 | notary3 | pass123  | ROLE_NOTARY |
 | admin1  | pass123  | ROLE_ADMIN  |
 | admin2  | pass123  | ROLE_ADMIN  |
+
 
 
 ## Links:
