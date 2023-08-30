@@ -28,6 +28,7 @@
                 <th scope="col">Buyer's Dec</th>
                 <th sec:authorize="hasAuthority('ROLE_ADMIN')" scope="col">Actions</th> 
                 <th sec:authorize="hasAnyAuthority('ROLE_ADMIN', 'ROLE_ACTOR')" scope="col">Acceptance</th> 
+                <th sec:authorize="hasAnyAuthority('ROLE_ADMIN', 'ROLE_NOTARY')" scope="col">Publish</th> 
 
             </tr>
             </thead>
@@ -60,6 +61,13 @@
                     <button type="submit" th:id="${contract.id}"
                         name="acceptAsBuyer"><i class="accept contract icon"></i>
                         Buyer's √
+                    </button>
+                </td>
+
+                <td sec:authorize="hasAnyAuthority('ROLE_ADMIN', 'ROLE_NOTARY')">
+                    <button type="submit" th:id="${contract.id}"
+                        name="publishContract"><i class="publish contract icon"></i>
+                        Yes
                     </button>
                 </td>
                 
@@ -114,6 +122,23 @@
                 data: {
                     buyerDec: true
                 },
+                success : function(result) {
+                    console.log(result);
+                    $(location).attr("href", value="/contractlist");
+                },
+                error : function(result) {
+                    console.log(result);
+                },
+            });
+        });
+    </script>
+
+    <script type="text/javascript">
+        $("[name='publishContract']").click(function() {
+            var urlCall = "/contracts/";
+            $.ajax({
+                url : urlCall + $(this).attr('id'),
+                type : 'POST',
                 success : function(result) {
                     console.log(result);
                     $(location).attr("href", value="/contractlist");

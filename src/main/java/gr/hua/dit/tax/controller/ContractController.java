@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import gr.hua.dit.tax.entities.Actor;
 import gr.hua.dit.tax.entities.Contract;
+import gr.hua.dit.tax.entities.PublishedContracts;
 import gr.hua.dit.tax.repository.ActorRepository;
 import gr.hua.dit.tax.repository.ContractRepository;
+import gr.hua.dit.tax.repository.PublishedContractsRepository;
 
 @RestController
 @RequestMapping("/contracts")
@@ -21,6 +23,9 @@ public class ContractController {
  
     @Autowired
     ContractRepository contractRepository;
+
+    @Autowired
+    PublishedContractsRepository publishedContractsRepository;
 
     @GetMapping("")
     public List<Contract> findAll(){
@@ -118,6 +123,30 @@ public class ContractController {
         }
 
         throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid seller ID");
+    }
+
+    // push contract to publishedCcontracts
+    @PostMapping("/{cid}")
+    PublishedContracts publishContract(@PathVariable int cid) {
+        
+        Contract contract = contractRepository.getReferenceById(cid);
+
+        if (contract == null) {
+            throw new ResponseStatusException(
+                HttpStatus.NOT_FOUND, "Contract not found"
+            );
+        }
+
+        PublishedContracts publishedContract = 
+            new PublishedContracts(contract.getAddress(), 
+                                   contract.getTax(), 
+                                   contract.getBuyer().getId(), 
+                                   contract.getSeller().getId(), 
+                                   contract.getNotary().getId());
+
+        publishedContractsRepository.save(publishedContract);
+        return publishedContract;
+    
     }
 
 }

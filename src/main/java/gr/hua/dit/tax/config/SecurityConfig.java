@@ -3,7 +3,6 @@ package gr.hua.dit.tax.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-// import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -15,7 +14,6 @@ import javax.sql.DataSource;
  
 @Configuration
 @EnableWebSecurity
-// @EnableGlobalMethodSecurity
 public class SecurityConfig {
 
     @Autowired
@@ -37,8 +35,10 @@ public class SecurityConfig {
             .antMatchers("/registern").permitAll()
 
             .antMatchers("/actors/**", "/notaries/**").hasAuthority("ROLE_ADMIN")
-            .antMatchers("/contracts/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_ACTOR")
+            .antMatchers("/contracts/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_ACTOR", "ROLE_NOTARY")
             .antMatchers("/users/**", "/settings/**").hasAuthority("ROLE_ADMIN")  //Den uparxoun controllers gia auta
+
+            .antMatchers("/publishedcontracts/**", "/publishedcontractslist/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_NOTARY", "ROLE_ACTOR")
 
             .antMatchers("/actorlist/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_NOTARY")
             .antMatchers("/contractlist/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_NOTARY", "ROLE_ACTOR")

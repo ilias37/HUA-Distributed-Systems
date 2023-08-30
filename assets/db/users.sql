@@ -2,26 +2,29 @@
 --DROP TABLE IF EXISTS users;
 --
 --
--- CREATE TABLE IF NOT exists users (
---     username VARCHAR(50) PRIMARY KEY,
---     password VARCHAR(100) NOT NULL,
---     enabled BOOLEAN NOT NULL
--- );
-
-
--- CREATE TABLE IF NOT EXISTS authorities (
---     username VARCHAR(50) NOT NULL,
---     authority VARCHAR(50) NOT NULL,
---     UNIQUE(username,authority),
---     CONSTRAINT fk_authorities_users FOREIGN KEY (username) REFERENCES users(username)
--- );
+--CREATE TABLE IF NOT exists users (
+--    username VARCHAR(50) PRIMARY KEY,
+--    password VARCHAR(100) NOT NULL,
+--    enabled BOOLEAN NOT NULL
+--);
+--
+--
+--CREATE TABLE IF NOT EXISTS authorities (
+--    username VARCHAR(50) NOT NULL,
+--    authority VARCHAR(50) NOT NULL,
+--    UNIQUE(username,authority),
+--    CONSTRAINT fk_authorities_users FOREIGN KEY (username) REFERENCES users(username)
+--);
 
 
 INSERT INTO users (username, password, enabled) VALUES
     ('actor1', '$2a$04$DR/f..s1siWJc8Xg3eJgpeB28a4V6kYpnkMPeOuq4rLQ42mJUYFGC', 't'),
     ('actor2', '$2a$04$DR/f..s1siWJc8Xg3eJgpeB28a4V6kYpnkMPeOuq4rLQ42mJUYFGC', 't'),
+    ('actor3', '$2a$04$DR/f..s1siWJc8Xg3eJgpeB28a4V6kYpnkMPeOuq4rLQ42mJUYFGC', 't'),
+    ('actor4', '$2a$04$DR/f..s1siWJc8Xg3eJgpeB28a4V6kYpnkMPeOuq4rLQ42mJUYFGC', 't'),
     ('notary1', '$2a$04$DR/f..s1siWJc8Xg3eJgpeB28a4V6kYpnkMPeOuq4rLQ42mJUYFGC', 't'),
     ('notary2', '$2a$04$DR/f..s1siWJc8Xg3eJgpeB28a4V6kYpnkMPeOuq4rLQ42mJUYFGC', 't'),
+    ('notary3', '$2a$04$DR/f..s1siWJc8Xg3eJgpeB28a4V6kYpnkMPeOuq4rLQ42mJUYFGC', 't'),
     ('admin1', '$2a$04$DR/f..s1siWJc8Xg3eJgpeB28a4V6kYpnkMPeOuq4rLQ42mJUYFGC', 't'),
     ('admin2', '$2a$04$DR/f..s1siWJc8Xg3eJgpeB28a4V6kYpnkMPeOuq4rLQ42mJUYFGC', 't')
 ;
@@ -30,8 +33,11 @@ INSERT INTO users (username, password, enabled) VALUES
 INSERT INTO authorities(username, authority) VALUES
     ('actor1', 'ROLE_ACTOR'),
     ('actor2', 'ROLE_ACTOR'),
+    ('actor3', 'ROLE_ACTOR'),
+    ('actor4', 'ROLE_ACTOR'),
     ('notary1', 'ROLE_NOTARY'),
     ('notary2', 'ROLE_NOTARY'),
+    ('notary3', 'ROLE_NOTARY'),
     ('admin1', 'ROLE_ADMIN'),
     ('admin2', 'ROLE_ADMIN')
 ;
@@ -39,29 +45,17 @@ INSERT INTO authorities(username, authority) VALUES
 
 INSERT INTO actors(username, firstname, lastname, email) VALUES
     ('actor1', 'Actor1', 'One1', 'actor1@hua.gr'),
-    ('actor2', 'Actor2', 'Two2', 'actor2@hua.gr')
+    ('actor2', 'Actor2', 'Two2', 'actor2@hua.gr'),
+    ('actor3', 'Actor3', 'Three3', 'actor3@hua.gr'),
+    ('actor4', 'Actor4', 'Four4', 'actor4@hua.gr')
 ;    
 
 
 INSERT INTO notaries(username, firstname, lastname, email) VALUES
     ('notary1', 'Notary1', 'One1', 'notary1@hua.gr'),
-    ('notary2', 'Notary2', 'Two2', 'notary2@hua.gr')
+    ('notary2', 'Notary2', 'Two2', 'notary2@hua.gr'),
+    ('notary3', 'Notary3', 'Three3', 'notary3@hua.gr')
 ;    
-
-
-INSERT INTO actors(username, firstname, lastname, email) VALUES
-    ('john', 'John', 'Ajohn', 'john@hua.gr'),
-    ('nick', 'Nick', 'Anick', 'nick@hua.gr'),
-    ('pavlos', 'Pavlos', 'Apavlos', 'pavlos@hua.gr'),
-    ('mike', 'Mike', 'Amike', 'mike@hua.gr')
-;
-
-
-INSERT INTO notaries(username, firstname, lastname, email) VALUES
-    ('symbol1', 'Symbol1', 'Asymbol1', 'symbol1@hua.gr'),
-    ('symbol2', 'Symbol2', 'Asymbol2', 'symbol2@hua.gr'),
-    ('symbol3', 'Symbol3', 'Asymbol3', 'symbol3@hua.gr')
-;
 
 
 INSERT INTO contracts(notaryid, sellerid, buyerid, address, tax, sellerdec, buyerdec) VALUES    
@@ -71,20 +65,16 @@ INSERT INTO contracts(notaryid, sellerid, buyerid, address, tax, sellerdec, buye
 ;
 
 
--- INSERT INTO userreg (username, firstname, lastname, email, password, role) VALUES
---     ('actor1', 'Actor1', 'One1', 'actor1@hua.gr', '$2a$04$DR/f..s1siWJc8Xg3eJgpeB28a4V6kYpnkMPeOuq4rLQ42mJUYFGC', 'ROLE_ACTOR'),
---     ('actor2', 'Actor2', 'Two2', 'actor2@hua.gr', '$2a$04$DR/f..s1siWJc8Xg3eJgpeB28a4V6kYpnkMPeOuq4rLQ42mJUYFGC', 'ROLE_ACTOR'),
---     ('john', 'John', 'Ajohn', 'john@hua.gr', '$2a$04$DR/f..s1siWJc8Xg3eJgpeB28a4V6kYpnkMPeOuq4rLQ42mJUYFGC', 'ROLE_ACTOR'),
---     ('nick', 'Nick', 'Anick', 'nick@hua.gr', '$2a$04$DR/f..s1siWJc8Xg3eJgpeB28a4V6kYpnkMPeOuq4rLQ42mJUYFGC', 'ROLE_ACTOR'),
---     ('pavlos', 'Pavlos', 'Apavlos', 'pavlos@hua.gr', '$2a$04$DR/f..s1siWJc8Xg3eJgpeB28a4V6kYpnkMPeOuq4rLQ42mJUYFGC', 'ROLE_ACTOR'),
---     ('mike', 'Mike', 'Amike', 'mike@hua.gr', '$2a$04$DR/f..s1siWJc8Xg3eJgpeB28a4V6kYpnkMPeOuq4rLQ42mJUYFGC', 'ROLE_ACTOR'),
---     ('notary1', 'Notary1', 'One1', 'notary1@hua.gr', '$2a$04$DR/f..s1siWJc8Xg3eJgpeB28a4V6kYpnkMPeOuq4rLQ42mJUYFGC', 'ROLE_NOTARY'),
---     ('notary2', 'Notary2', 'Two2', 'notary2@hua.gr', '$2a$04$DR/f..s1siWJc8Xg3eJgpeB28a4V6kYpnkMPeOuq4rLQ42mJUYFGC', 'ROLE_NOTARY'),
---     ('symbol1', 'Symbol1', 'Asymbol1', 'symbol1@hua.gr', '$2a$04$DR/f..s1siWJc8Xg3eJgpeB28a4V6kYpnkMPeOuq4rLQ42mJUYFGC', 'ROLE_NOTARY'),
---     ('symbol2', 'Symbol2', 'Asymbol2', 'symbol2@hua.gr', '$2a$04$DR/f..s1siWJc8Xg3eJgpeB28a4V6kYpnkMPeOuq4rLQ42mJUYFGC', 'ROLE_NOTARY'),
---     ('symbol3', 'Symbol3', 'Asymbol3', 'symbol3@hua.gr', '$2a$04$DR/f..s1siWJc8Xg3eJgpeB28a4V6kYpnkMPeOuq4rLQ42mJUYFGC', 'ROLE_NOTARY')
--- ;
-
+--INSERT INTO userreg (username, firstname, lastname, email, password, role) VALUES
+--    ('actor1', 'Actor1', 'One1', 'actor1@hua.gr', '$2a$04$DR/f..s1siWJc8Xg3eJgpeB28a4V6kYpnkMPeOuq4rLQ42mJUYFGC', 'ROLE_ACTOR'),
+--    ('actor2', 'Actor2', 'Two2', 'actor2@hua.gr', '$2a$04$DR/f..s1siWJc8Xg3eJgpeB28a4V6kYpnkMPeOuq4rLQ42mJUYFGC', 'ROLE_ACTOR'),
+--    ('actor3', 'Actor3', 'Three3', 'actor3@hua.gr', '$2a$04$DR/f..s1siWJc8Xg3eJgpeB28a4V6kYpnkMPeOuq4rLQ42mJUYFGC', 'ROLE_ACTOR'),
+--    ('actor4', 'Actor4', 'Four4', 'actor4@hua.gr', '$2a$04$DR/f..s1siWJc8Xg3eJgpeB28a4V6kYpnkMPeOuq4rLQ42mJUYFGC', 'ROLE_ACTOR'),
+--    ('notary1', 'Notary1', 'One1', 'notary1@hua.gr', '$2a$04$DR/f..s1siWJc8Xg3eJgpeB28a4V6kYpnkMPeOuq4rLQ42mJUYFGC', 'ROLE_NOTARY'),
+--    ('notary2', 'Notary2', 'Two2', 'notary2@hua.gr', '$2a$04$DR/f..s1siWJc8Xg3eJgpeB28a4V6kYpnkMPeOuq4rLQ42mJUYFGC', 'ROLE_NOTARY'),
+--    ('notary3', 'Notary3', 'Three3', 'notary3@hua.gr', '$2a$04$DR/f..s1siWJc8Xg3eJgpeB28a4V6kYpnkMPeOuq4rLQ42mJUYFGC', 'ROLE_NOTARY')
+--;
+--
 
 -------------------------------------------------------------------------------------------
 

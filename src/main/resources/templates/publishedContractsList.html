@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en"
+      xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{page_layout/layout}">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Published Contracts List</title>
+</head>
+
+<body>
+<div layout:fragment="main-content">
+
+    <div th:if="${ not#lists.isEmpty(publishedContracts)}">
+        <table  class="table table-dark table-striped">
+
+            <thead>
+            <tr>
+                <th scope="col">Contract ID</th>
+                <th scope="col">Notary ID</th>
+                <th scope="col">Seller ID</th>
+                <th scope="col">Buyer ID</th>
+                <th scope="col">Address</th>
+                <th scope="col">Tax</th>
+                <th sec:authorize="hasAnyAuthority('ROLE_ADMIN', 'ROLE_NOTARY')" scope="col">Actions</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr th:each="publishedContract : ${publishedContracts}">
+                <td th:text="${publishedContract.id}"></td>
+                <td th:text="${publishedContract.notaryId}"></td>
+                <td th:text="${publishedContract.sellerId}"></td>
+                <td th:text="${publishedContract.buyerId}"></td>
+                <td th:text="${publishedContract.address}"></td>
+                <td th:text="${publishedContract.tax}"></td>
+
+                <td sec:authorize="hasAnyAuthority('ROLE_ADMIN', 'ROLE_NOTARY')">
+                    <button type="submit" th:id="${publishedContract.id}"
+                        name="deletePublishedContract"><i class="remove contract icon"></i>
+                        Delete
+                    </button>
+                </td>
+                
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script type="text/javascript">
+        $("[name='deletePublishedContract']").click(function() {
+            var urlCall = "/publishedcontracts/";
+            $.ajax({
+                url : urlCall + $(this).attr('id'),
+                type : 'DELETE',
+                success : function(result) {
+                    console.log(result);
+                    $(location).attr("href", value="/publishedcontractslist");
+                },
+                error : function(result) {
+                    console.log(result);
+                },
+            });
+        });
+    </script>
+
+</div>
+</body>
+</html>

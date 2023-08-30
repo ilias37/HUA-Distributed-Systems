@@ -20,6 +20,8 @@
             <a sec:authorize="hasAnyAuthority('ROLE_ADMIN', 'ROLE_NOTARY', 'ROLE_ACTOR')" class="nav-link fw-bold py-1 px-0" aria-current="page" href="/contractlist" th:href="@{/contractlist}">Contract List</a>
             <a sec:authorize="hasAnyAuthority('ROLE_ADMIN', 'ROLE_NOTARY')" class="nav-link fw-bold py-1 px-0" href="/contractform" th:href="@{/contractform}">Contract form</a>
 
+            <a sec:authorize="hasAnyAuthority('ROLE_ADMIN', 'ROLE_NOTARY', 'ROLE_ACTOR')" class="nav-link fw-bold py-1 px-0" aria-current="page" href="/publishedcontractslist" th:href="@{/publishedcontractslist}">Published Contracts List</a>
+
             <a sec:authorize="hasAuthority('ROLE_ADMIN')" class="nav-link fw-bold py-1 px-0" aria-current="page" href="/notarylist" th:href="@{/notarylist}">Notary List</a>
             <a sec:authorize="hasAuthority('ROLE_ADMIN')" class="nav-link fw-bold py-1 px-0" href="/notaryform" th:href="@{/notaryform}">Notary form</a>
 
