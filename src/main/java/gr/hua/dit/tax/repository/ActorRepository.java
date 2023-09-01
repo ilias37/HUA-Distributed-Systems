@@ -6,5 +6,7 @@ import gr.hua.dit.tax.entities.Actor;
 
 @Repository
 public interface ActorRepository extends JpaRepository<Actor, Integer>{
-    
+
+    Actor findByUsername(String username);
+
 }

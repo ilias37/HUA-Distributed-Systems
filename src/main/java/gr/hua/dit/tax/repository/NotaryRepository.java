@@ -6,5 +6,7 @@ import gr.hua.dit.tax.entities.Notary;
 
 @Repository
 public interface NotaryRepository extends JpaRepository<Notary, Integer>{
+
+    Notary findByUsername(String username);
     
 }
