@@ -9,9 +9,14 @@
 </head>
 <body>
 <div layout:fragment="main-content">
- <h1>
+    <h1>
      Welcome!
- </h1>
+    </h1>
+
+    <div sec:authorize="!isAuthenticated()">Login to see your special message.</div>
+    <div sec:authorize="hasAuthority('ROLE_ACTOR')">Hi, you are a boring actor.</div>
+    <div sec:authorize="hasAuthority('ROLE_NOTARY')">Hi, you are a normal notary.</div>
+    <div sec:authorize="hasAuthority('ROLE_ADMIN')">Hi, you are a powerful admin.</div>
 </div>
 </body>
 </html>

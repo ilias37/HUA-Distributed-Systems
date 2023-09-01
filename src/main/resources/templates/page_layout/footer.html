@@ -20,15 +20,11 @@
         </th:block>
     </div>
 
-    <div sec:authorize="hasAuthority('ROLE_ACTOR')">Hi, you are a boring actor.</div>
-    <div sec:authorize="hasAuthority('ROLE_NOTARY')">Hi, you are a normal notary.</div>
-    <div sec:authorize="hasAuthority('ROLE_ADMIN')">Hi, you are a powerful admin.</div>
-
     <div sec:authorize="isAuthenticated()">Authenticated username: 
         <span sec:authentication="principal.username"></span>
     </div>
 
-    <div sec:authorize="isAuthenticated()">Authenticated user roles:
+    <div sec:authorize="isAuthenticated()">Authenticated user role:
         <span sec:authentication="principal.authorities"></span>
     </div>
 
