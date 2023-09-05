@@ -15,7 +15,7 @@
             <a class="nav-link fw-bold py-1 px-0 active" aria-current="page" href="/" th:href="@{/}">Home</a>
 
             <a sec:authorize="hasAnyAuthority('ROLE_ADMIN', 'ROLE_NOTARY')" class="nav-link fw-bold py-1 px-0" aria-current="page" href="/actorlist" th:href="@{/actorlist}">Actor List</a>
-            <a sec:authorize="hasAuthority('ROLE_ADMIN')" class="nav-link fw-bold py-1 px-0" href="/actorform" th:href="@{/actorform}">Actor form</a>
+            <!-- <a sec:authorize="hasAuthority('ROLE_ADMIN')" class="nav-link fw-bold py-1 px-0" href="/actorform" th:href="@{/actorform}">Actor form</a> -->
 
             <a sec:authorize="hasAnyAuthority('ROLE_ADMIN', 'ROLE_NOTARY', 'ROLE_ACTOR')" class="nav-link fw-bold py-1 px-0" aria-current="page" href="/contractlist" th:href="@{/contractlist}">Contract List</a>
             <a sec:authorize="hasAnyAuthority('ROLE_ADMIN', 'ROLE_NOTARY')" class="nav-link fw-bold py-1 px-0" href="/contractform" th:href="@{/contractform}">Contract form</a>
@@ -23,7 +23,7 @@
             <a sec:authorize="hasAnyAuthority('ROLE_ADMIN', 'ROLE_NOTARY', 'ROLE_ACTOR')" class="nav-link fw-bold py-1 px-0" aria-current="page" href="/publishedcontractslist" th:href="@{/publishedcontractslist}">Published Contracts List</a>
 
             <a sec:authorize="hasAuthority('ROLE_ADMIN')" class="nav-link fw-bold py-1 px-0" aria-current="page" href="/notarylist" th:href="@{/notarylist}">Notary List</a>
-            <a sec:authorize="hasAuthority('ROLE_ADMIN')" class="nav-link fw-bold py-1 px-0" href="/notaryform" th:href="@{/notaryform}">Notary form</a>
+            <!-- <a sec:authorize="hasAuthority('ROLE_ADMIN')" class="nav-link fw-bold py-1 px-0" href="/notaryform" th:href="@{/notaryform}">Notary form</a> -->
 
             <a sec:authorize="isAuthenticated()" class="nav-link fw-bold py-1 px-0" href="/logout" th:href="@{/logout}">Logout</a>
             <a sec:authorize="!isAuthenticated()" class="nav-link fw-bold py-1 px-0" href="/login" th:href="@{/login}">Login</a>
