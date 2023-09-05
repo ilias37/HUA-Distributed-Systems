@@ -24,6 +24,7 @@ public class PublishedContractsFormController {
     @Autowired
     NotaryRepository notaryRepository;
 
+    //emfanizei mono ta sumvolaia pou summetexei o actor h o notary, o admin vlepei ta panta
     @GetMapping("/publishedcontractslist")
     public String showPublishedContractsList(Model model) {
 
