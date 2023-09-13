@@ -16,10 +16,10 @@ docker volume rm pgdata14
 ## App's users
 | USERS   | PASSWORD | ROLES       |
 |---------|----------|-------------|
-| actor1  | pass123  | ROLE_USER   |
-| actor2  | pass123  | ROLE_USER   |
-| actor3  | pass123  | ROLE_USER   |
-| actor4  | pass123  | ROLE_USER   |
+| actor1  | pass123  | ROLE_ACTOR  |
+| actor2  | pass123  | ROLE_ACTOR  |
+| actor3  | pass123  | ROLE_ACTOR  |
+| actor4  | pass123  | ROLE_ACTOR  |
 | notary1 | pass123  | ROLE_NOTARY |
 | notary2 | pass123  | ROLE_NOTARY |
 | notary3 | pass123  | ROLE_NOTARY |
