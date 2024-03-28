@@ -1,3 +1,5 @@
+The purpose is to create a platform that settles contracts between real estate buyers and notaries.
+
 ### Run the app
 
 Step 1: Run from terminal
